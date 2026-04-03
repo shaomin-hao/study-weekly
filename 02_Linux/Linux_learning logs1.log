@@ -1,0 +1,317 @@
+[hdusr@localhost ~]$ pwd
+/home/hdusr
+[hdusr@localhost ~]$ ls
+Desktop    Downloads  Pictures  runoob     Videos
+Documents  Music      Public    Templates
+[hdusr@localhost ~]$ mkdir test_dir
+[hdusr@localhost ~]$ cd test_dir
+[hdusr@localhost test_dir]$ pwd
+/home/hdusr/test_dir
+[hdusr@localhost test_dir]$ cd..
+bash: cd..: command not found...
+[hdusr@localhost test_dir]$ cd ..
+[hdusr@localhost ~]$ ls
+Desktop    Downloads  Pictures  runoob     test_dir
+Documents  Music      Public    Templates  Videos
+[hdusr@localhost ~]$ cp -r test_dir test_dir2
+[hdusr@localhost ~]$ ls
+Desktop    Downloads  Pictures  runoob     test_dir   Videos
+Documents  Music      Public    Templates  test_dir2
+[hdusr@localhost ~]$ mv test_dir2 test_dir_rename
+[hdusr@localhost ~]$ ls
+Desktop    Downloads  Pictures  runoob     test_dir         Videos
+Documents  Music      Public    Templates  test_dir_rename
+[hdusr@localhost ~]$ rm -rf test_dir_rename
+[hdusr@localhost ~]$ ls
+Desktop  Documents  Downloads  Music  Pictures  Public  runoob  Templates  test_dir  Videos
+[hdusr@localhost ~]$ touch test.txt
+[hdusr@localhost ~]$ echo "hello linux" > test.txt
+[hdusr@localhost ~]$ cat test.txt
+hello linux
+[hdusr@localhost ~]$ head -n 2 test.txt
+hello linux
+[hdusr@localhost ~]$ tail test.txt
+hello linux
+[hdusr@localhost ~]$ nl test.txt
+     1	hello linux
+[hdusr@localhost ~]$ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        471M     0  471M   0% /dev
+tmpfs           487M     0  487M   0% /dev/shm
+tmpfs           487M   21M  466M   5% /run
+tmpfs           487M     0  487M   0% /sys/fs/cgroup
+/dev/sda3        18G  4.2G   14G  24% /
+/dev/sda1       297M  152M  145M  52% /boot
+tmpfs            98M   48K   98M   1% /run/user/1000
+[hdusr@localhost ~]$ du -sh
+5.7M	.
+[hdusr@localhost ~]$ yum check-update
+Loaded plugins: fastestmirror, langpacks
+Determining fastest mirrors
+Could not retrieve mirrorlist http://mirrorlist.centos.org/?release=7&arch=x86_64&repo=os&infra=stock error was
+14: curl#6 - "Could not resolve host: mirrorlist.centos.org; Unknown error"
+
+
+ One of the configured repositories failed (Unknown),
+ and yum doesn't have enough cached data to continue. At this point the only
+ safe thing yum can do is fail. There are a few ways to work "fix" this:
+
+     1. Contact the upstream for the repository and get them to fix the problem.
+
+     2. Reconfigure the baseurl/etc. for the repository, to point to a working
+        upstream. This is most often useful if you are using a newer
+        distribution release than is supported by the repository (and the
+        packages for the previous distribution release still work).
+
+     3. Run the command with the repository temporarily disabled
+            yum --disablerepo=<repoid> ...
+
+     4. Disable the repository permanently, so yum won't use it by default. Yum
+        will then just ignore the repository until you permanently enable it
+        again or use --enablerepo for temporary usage:
+
+            yum-config-manager --disable <repoid>
+        or
+            subscription-manager repos --disable=<repoid>
+
+     5. Configure the failing repository to be skipped, if it is unavailable.
+        Note that yum will try to contact the repo. when it runs most commands,
+        so will have to try and fail each time (and thus. yum will be be much
+        slower). If it is a very temporary problem though, this is often a nice
+        compromise:
+
+            yum-config-manager --save --setopt=<repoid>.skip_if_unavailable=true
+
+Cannot find a valid baseurl for repo: base/7/x86_64
+[hdusr@localhost ~]$ sudo apt update
+
+We trust you have received the usual lecture from the local System
+Administrator. It usually boils down to these three things:
+
+    #1) Respect the privacy of others.
+    #2) Think before you type.
+    #3) With great power comes great responsibility.
+
+[sudo] password for hdusr: 
+hdusr is not in the sudoers file.  This incident will be reported.
+[hdusr@localhost ~]$ ^C
+[hdusr@localhost ~]$ yum list
+Loaded plugins: fastestmirror, langpacks
+Loading mirror speeds from cached hostfile
+Could not retrieve mirrorlist http://mirrorlist.centos.org/?release=7&arch=x86_64&repo=os&infra=stock error was
+14: curl#6 - "Could not resolve host: mirrorlist.centos.org; Unknown error"
+
+
+ One of the configured repositories failed (Unknown),
+ and yum doesn't have enough cached data to continue. At this point the only
+ safe thing yum can do is fail. There are a few ways to work "fix" this:
+
+     1. Contact the upstream for the repository and get them to fix the problem.
+
+     2. Reconfigure the baseurl/etc. for the repository, to point to a working
+        upstream. This is most often useful if you are using a newer
+        distribution release than is supported by the repository (and the
+        packages for the previous distribution release still work).
+
+     3. Run the command with the repository temporarily disabled
+            yum --disablerepo=<repoid> ...
+
+     4. Disable the repository permanently, so yum won't use it by default. Yum
+        will then just ignore the repository until you permanently enable it
+        again or use --enablerepo for temporary usage:
+
+            yum-config-manager --disable <repoid>
+        or
+            subscription-manager repos --disable=<repoid>
+
+     5. Configure the failing repository to be skipped, if it is unavailable.
+        Note that yum will try to contact the repo. when it runs most commands,
+        so will have to try and fail each time (and thus. yum will be be much
+        slower). If it is a very temporary problem though, this is often a nice
+        compromise:
+
+            yum-config-manager --save --setopt=<repoid>.skip_if_unavailable=true
+
+Cannot find a valid baseurl for repo: base/7/x86_64
+[hdusr@localhost ~]$ ^C
+[hdusr@localhost ~]$ rm test.txt
+[hdusr@localhost ~]$ ls
+Desktop  Documents  Downloads  Music  Pictures  Public  runoob  Templates  test_dir  Videos
+[hdusr@localhost ~]$ id
+uid=1000(hdusr) gid=1000(hdusr) groups=1000(hdusr) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
+[hdusr@localhost ~]$ uname -a
+Linux localhost.localdomain 3.10.0-1160.el7.x86_64 #1 SMP Mon Oct 19 16:18:59 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
+[hdusr@localhost ~]$ whoami
+hdusr
+[hdusr@localhost ~]$ find
+.
+./.mozilla
+./.mozilla/extensions
+./.mozilla/plugins
+./.bash_logout
+./.bash_profile
+./.bashrc
+./.cache
+./.cache/gdm
+./.cache/gdm/session.log
+./.cache/imsettings
+./.cache/imsettings/log
+./.cache/libgweather
+./.cache/evolution
+./.cache/evolution/addressbook
+./.cache/evolution/addressbook/trash
+./.cache/evolution/calendar
+./.cache/evolution/calendar/trash
+./.cache/evolution/mail
+./.cache/evolution/mail/trash
+./.cache/evolution/memos
+./.cache/evolution/memos/trash
+./.cache/evolution/sources
+./.cache/evolution/sources/trash
+./.cache/evolution/tasks
+./.cache/evolution/tasks/trash
+./.cache/gnome-shell
+./.cache/gnome-shell/update-check-3.28
+./.cache/abrt
+./.cache/abrt/applet_dirlist
+./.cache/abrt/lastnotification
+./.cache/event-sound-cache.tdb.localhost.localdomain.x86_64-redhat-linux-gnu
+./.cache/tracker
+./.cache/tracker/db-version.txt
+./.cache/tracker/meta.db
+./.cache/tracker/db-locale.txt
+./.cache/tracker/meta.db-wal
+./.cache/tracker/meta.db-shm
+./.cache/tracker/ontologies.gvdb
+./.cache/tracker/parser-sha1.txt
+./.cache/tracker/locale-for-miner-user-guides.txt
+./.cache/tracker/locale-for-miner-apps.txt
+./.cache/tracker/last-crawl.txt
+./.cache/tracker/first-index.txt
+./.cache/gstreamer-1.0
+./.cache/gstreamer-1.0/registry.x86_64.bin
+./.cache/flatpak
+./.cache/flatpak/system-cache
+./.cache/yelp
+./.cache/yelp/WebKitCache
+./.cache/yelp/WebKitCache/Version 16
+./.cache/yelp/WebKitCache/Version 16/salt
+./.cache/yelp/WebKitCache/Version 16/Blobs
+./.cache/media-art
+./.cache/gnome-software
+./.cache/gnome-software/shell-extensions
+./.cache/gnome-software/odrs
+./.cache/gnome-software/odrs/ratings.json
+./.dbus
+./.dbus/session-bus
+./.dbus/session-bus/ac83eead31ad40e2b2803b3cbb556344-0
+./.config
+./.config/imsettings
+./.config/gnome-session
+./.config/gnome-session/saved-session
+./.config/pulse
+./.config/pulse/ac83eead31ad40e2b2803b3cbb556344-device-volumes.tdb
+./.config/pulse/ac83eead31ad40e2b2803b3cbb556344-stream-volumes.tdb
+./.config/pulse/ac83eead31ad40e2b2803b3cbb556344-card-database.tdb
+./.config/pulse/cookie
+./.config/pulse/ac83eead31ad40e2b2803b3cbb556344-default-sink
+./.config/pulse/ac83eead31ad40e2b2803b3cbb556344-default-source
+./.config/ibus
+./.config/ibus/bus
+./.config/ibus/bus/ac83eead31ad40e2b2803b3cbb556344-unix-0
+./.config/dconf
+./.config/dconf/user
+./.config/evolution
+./.config/evolution/sources
+./.config/evolution/sources/system-proxy.source
+./.config/goa-1.0
+./.config/user-dirs.dirs
+./.config/user-dirs.locale
+./.config/gconf
+./.config/gtk-3.0
+./.config/gtk-3.0/bookmarks
+./.config/abrt
+./.config/nautilus
+./.config/nautilus/desktop-metadata
+./.config/gnome-initial-setup-done
+./.config/yelp
+./.config/yelp/yelp.cfg
+./.ICEauthority
+./.local
+./.local/share
+./.local/share/keyrings
+./.local/share/keyrings/login.keyring
+./.local/share/keyrings/user.keystore
+./.local/share/gnome-shell
+./.local/share/gnome-shell/application_state
+./.local/share/telepathy
+./.local/share/telepathy/mission-control
+./.local/share/telepathy/mission-control/accounts.cfg
+./.local/share/telepathy/mission-control/accounts-goa.cfg
+./.local/share/evolution
+./.local/share/evolution/addressbook
+./.local/share/evolution/addressbook/trash
+./.local/share/evolution/addressbook/system
+./.local/share/evolution/addressbook/system/contacts.db
+./.local/share/evolution/addressbook/system/photos
+./.local/share/evolution/calendar
+./.local/share/evolution/calendar/trash
+./.local/share/evolution/calendar/system
+./.local/share/evolution/calendar/system/calendar.ics
+./.local/share/evolution/mail
+./.local/share/evolution/mail/trash
+./.local/share/evolution/memos
+./.local/share/evolution/memos/trash
+./.local/share/evolution/tasks
+./.local/share/evolution/tasks/trash
+./.local/share/gsettings-data-convert
+./.local/share/sounds
+./.local/share/applications
+./.local/share/icc
+./.local/share/gnome-settings-daemon
+./.local/share/gnome-settings-daemon/input-sources-converted
+./.local/share/flatpak
+./.local/share/flatpak/db
+./.local/share/flatpak/repo
+./.local/share/flatpak/repo/config
+./.local/share/flatpak/repo/tmp
+./.local/share/flatpak/repo/tmp/cache
+./.local/share/flatpak/repo/extensions
+./.local/share/flatpak/repo/state
+./.local/share/flatpak/repo/refs
+./.local/share/flatpak/repo/refs/heads
+./.local/share/flatpak/repo/refs/mirrors
+./.local/share/flatpak/repo/refs/remotes
+./.local/share/flatpak/repo/objects
+./.local/share/flatpak/.changed
+./.local/share/gvfs-metadata
+./.local/share/gvfs-metadata/home
+./.local/share/gvfs-metadata/home-b60ea05e.log
+./.local/share/gvfs-metadata/root
+./.local/share/gvfs-metadata/root-2392e370.log
+./.local/share/tracker
+./.local/share/tracker/data
+./.local/share/tracker/data/.meta.isrunning
+./.local/share/tracker/data/tracker-store.journal
+./.local/share/tracker/data/tracker-store.ontology.journal
+./.local/share/nautilus
+./.local/share/nautilus/scripts
+./.local/share/webkitgtk
+./.local/share/webkitgtk/deviceidhashsalts
+./.local/share/webkitgtk/deviceidhashsalts/1
+./.local/share/webkitgtk/databases
+./.local/share/webkitgtk/databases/indexeddb
+./.local/share/webkitgtk/databases/indexeddb/v1
+./.local/share/webkitgtk/localstorage
+./.esd_auth
+./Desktop
+./Downloads
+./Templates
+./Public
+./Documents
+./Music
+./Pictures
+./Videos
+./.bash_history
+./runoob
+./test_dir
