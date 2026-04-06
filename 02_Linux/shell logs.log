@@ -1,0 +1,156 @@
+[hdusr@localhost ~]$ vim test.sh
+[hdusr@localhost ~]$ chmod +x test.sh
+[hdusr@localhost ~]$ ./test.sh
+Hello World !
+[hdusr@localhost ~]$ vim test.sh
+[hdusr@localhost ~]$ vim variable.sh
+[hdusr@localhost ~]$ ./variable.sh
+bash: ./variable.sh: Permission denied
+[hdusr@localhost ~]$ chmod +x variable.sh
+[hdusr@localhost ~]$ ./variable.sh
+姓名：郝少敏，年龄：22
+当前用户：hdusr
+家目录：/home/hdusr
+系统路径：/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/home/hdusr/.local/bin:/home/hdusr/bin
+职业：学生lalalala
+临时变量：临时变量
+删除后临时变量：
+[hdusr@localhost ~]$ vim param.sh
+[hdusr@localhost ~]$ chmod +x param.sh
+[hdusr@localhost ~]$ ./param.sh 你好 世界 123
+脚本名：./param.sh
+第1个参数：你好
+第2个参数：世界
+第3个参数：123
+参数总个数：3
+所有参数（$@）：你好 世界 123
+所有参数（$*）：你好 世界 123
+上条命令执行状态：0
+[hdusr@localhost ~]$ vim array.sh
+[hdusr@localhost ~]$ chomd +x array.sh
+bash: chomd: command not found...
+Similar command is: 'chmod'
+[hdusr@localhost ~]$ ./array.sh
+bash: ./array.sh: Permission denied
+[hdusr@localhost ~]$ ^C
+[hdusr@localhost ~]$ chmod +x array.sh
+[hdusr@localhost ~]$ ./array.sh
+第一个水果：苹果
+所有水果：苹果 香蕉 橙子 葡萄
+水果数组长度：4
+数字数组长度：5
+遍历水果数组：
+苹果
+香蕉
+橙子
+葡萄
+[hdusr@localhost ~]$ vim print.sh
+[hdusr@localhost ~]$ chmod +x print.sh
+[hdusr@localhost ~]$ ./print.sh
+Hello, Shell!
+换行
+测试	制表符
+当前用户：hdusr
+姓名     年龄   职业
+郝少敏  24       学生
+张三     25       程序员
+[hdusr@localhost ~]$ vim function.sh
+[hdusr@localhost ~]$ chmod +x function.sh
+[hdusr@localhost ~]$ ./function.sh
+===== 调用求和函数 =====
+63
+和为：输入两个数字，计算和：
+63
+===== 调用问候函数 =====
+你好，郝少敏！欢迎学习Shell！
+[hdusr@localhost ~]$ ./function.sh
+===== 调用求和函数 =====
+6 3
+和为：输入两个数字，计算和：
+9
+===== 调用问候函数 =====
+你好，郝少敏！欢迎学习Shell！
+[hdusr@localhost ~]$ 
+
+variable.sh      # 变量实操
+#!/bin/bash
+# Shell变量实操
+# 1. 自定义变量
+name="郝少敏"
+age=22
+echo "姓名：$name，年龄：$age"
+
+# 2. 环境变量
+echo "当前用户：$USER"
+echo "家目录：$HOME"
+echo "系统路径：$PATH"
+
+# 3. 只读变量
+readonly job="学生lalalala"
+echo "职业：$job"
+# job="程序员"  # 会报错，只读变量不可修改
+
+# 4. 删除变量
+temp="临时变量"
+echo "临时变量：$temp"
+unset temp
+echo "删除后临时变量：$temp"  # 输出为空
+~                                                                               
+"variable.sh" 22L, 474C                                       7,0-1         All
+
+
+param.sh         # 传递参数
+#!/bin/bash
+# Shell传递参数实操
+echo "脚本名：$0"
+echo "第1个参数：$1"
+echo "第2个参数：$2"
+echo "第3个参数：$3"
+echo "参数总个数：$#"
+echo "所有参数（\$@）：$@"
+echo "所有参数（\$*）：$*"
+echo "上条命令执行状态：$?"
+
+array.sh         # 数组实操
+#!/bin/bash
+# Shell数组实操
+# 1. 定义数组
+fruits=("苹果" "香蕉" "橙子" "葡萄")
+nums=(1 2 3 4 5)
+
+# 2. 读取数组元素
+echo "第一个水果：${fruits[0]}"
+echo "所有水果：${fruits[@]}"
+
+# 3. 获取数组长度
+echo "水果数组长度：${#fruits[@]}"
+echo "数字数组长度：${#nums[@]}"
+
+# 4. 遍历数组
+echo "遍历水果数组："
+for fruit in ${fruits[@]}
+do
+    echo "$fruit"
+done
+~                                                                               
+~                                                                               
+~                                                                               
+"array.sh" 20L, 417C                                          20,1          All
+
+
+print.sh         # echo/printf
+#!/bin/bash
+# echo/printf实操
+# 1. echo命令
+echo "Hello, Shell!"
+echo -e "换行\n测试\t制表符"  # -e 开启转义
+echo "当前用户：$USER"
+
+# 2. printf命令
+printf "%-10s %-8s %-4s\n" 姓名 年龄 职业
+printf "%-10s %-8s %-4s\n" 郝少敏 24 学生
+printf "%-10s %-8s %-4s\n" 张三 25 程序员
+~                                                
+
+
+
